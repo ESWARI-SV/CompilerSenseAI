@@ -1,0 +1,403 @@
+
+[
+  {
+    "id": "valid_001",
+    "category": "valid",
+    "description": "Minimal valid main returning int",
+    "source": "int main() {\n    int x = 10;\n    int y = x + 5;\n    return y;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_002",
+    "category": "valid",
+    "description": "Valid float arithmetic",
+    "source": "float compute(float a, float b) {\n    float result = a + b;\n    return result;\n}\nint main() {\n    float r = compute(1.5, 2.5);\n    return 0;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_003",
+    "category": "valid",
+    "description": "If-else statement",
+    "source": "int main() {\n    int x = 10;\n    int y = 0;\n    if (x > 5) {\n        y = 1;\n    } else {\n        y = 0;\n    }\n    return y;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_004",
+    "category": "valid",
+    "description": "While loop",
+    "source": "int main() {\n    int i = 0;\n    while (i < 10) {\n        i = i + 1;\n    }\n    return i;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_005",
+    "category": "valid",
+    "description": "For loop",
+    "source": "int main() {\n    int sum = 0;\n    int i;\n    for (i = 0; i < 10; i = i + 1) {\n        sum = sum + i;\n    }\n    return sum;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_006",
+    "category": "valid",
+    "description": "Nested blocks and char",
+    "source": "int main() {\n    int x = 65;\n    {\n        int y = x + 1;\n        char c = 'A';\n    }\n    return x;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_007",
+    "category": "valid",
+    "description": "Function call and return",
+    "source": "int square(int n) {\n    return n * n;\n}\nint main() {\n    int s = square(5);\n    return s;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_008",
+    "category": "valid",
+    "description": "Logical and relational expressions",
+    "source": "int main() {\n    int x = 5;\n    int y = 10;\n    int z = (x < y) && (y > 0);\n    return z;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_009",
+    "category": "valid",
+    "description": "Comments",
+    "source": "/* Multi-line\n   comment */\nint main() {\n    // Single-line comment\n    int x = 42;\n    return x;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "valid_010",
+    "category": "valid",
+    "description": "Void function no return value",
+    "source": "void greet() {\n    int x = 1;\n    return;\n}\nint main() {\n    greet();\n    return 0;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "lex_001",
+    "category": "lexical",
+    "description": "Illegal character #",
+    "source": "int main() {\n    int x = 10 #;\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["lexical"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "lex_002",
+    "category": "lexical",
+    "description": "Unterminated string",
+    "source": "int main() {\n    \"oops\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["lexical"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "lex_003",
+    "category": "lexical",
+    "description": "Illegal dollar sign",
+    "source": "int main() {\n    int $x = 5;\n    return $x;\n}\n",
+    "expected_errors": 2,
+    "expected_categories": ["lexical"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "lex_004",
+    "category": "lexical",
+    "description": "Illegal character @",
+    "source": "int main() {\n    int x = 10 @;\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["lexical"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "lex_005",
+    "category": "lexical",
+    "description": "Valid float literal with exponent",
+    "source": "int main() {\n    float x = 1.5e2;\n    return 0;\n}\n",
+    "expected_errors": 0,
+    "expected_categories": [],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "syn_001",
+    "category": "syntax",
+    "description": "Missing semicolon after declaration",
+    "source": "int main() {\n    int x = 10\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "semicolon"
+  },
+  {
+    "id": "syn_002",
+    "category": "syntax",
+    "description": "Missing closing brace",
+    "source": "int main() {\n    int x = 10;\n    return x;\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "brace"
+  },
+  {
+    "id": "syn_003",
+    "category": "syntax",
+    "description": "Missing opening parenthesis in if",
+    "source": "int main() {\n    int x = 5;\n    if x > 0 {\n        x = 1;\n    }\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "syn_004",
+    "category": "syntax",
+    "description": "Missing semicolon in for",
+    "source": "int main() {\n    int i;\n    for (i = 0 i < 10; i = i + 1) {\n        i = i + 1;\n    }\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "semicolon"
+  },
+  {
+    "id": "syn_005",
+    "category": "syntax",
+    "description": "Extra closing brace",
+    "source": "int main() {\n    int x = 5;\n    return x;\n}}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "syn_006",
+    "category": "syntax",
+    "description": "Missing return type",
+    "source": "main() {\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "syn_007",
+    "category": "syntax",
+    "description": "Keyword typo: retrun",
+    "source": "int main() {\n    int x = 5;\n    retrun x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "keyword"
+  },
+  {
+    "id": "syn_008",
+    "category": "syntax",
+    "description": "Missing condition in while",
+    "source": "int main() {\n    while () {\n        int x = 1;\n    }\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "syn_009",
+    "category": "syntax",
+    "description": "Missing semicolon at end",
+    "source": "int main() {\n    int x = 5\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "semicolon"
+  },
+  {
+    "id": "syn_010",
+    "category": "syntax",
+    "description": "Operator without operand",
+    "source": "int main() {\n    int x = + ;\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_001",
+    "category": "semantic",
+    "description": "Undeclared identifier in return",
+    "source": "int main() {\n    int x = 10;\n    return y;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_002",
+    "category": "semantic",
+    "description": "Type mismatch: int = string",
+    "source": "int main() {\n    int x = \"hello\";\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_003",
+    "category": "semantic",
+    "description": "Duplicate declaration",
+    "source": "int main() {\n    int x = 1;\n    int x = 2;\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_004",
+    "category": "semantic",
+    "description": "Undeclared function call",
+    "source": "int main() {\n    int r = foo(5);\n    return r;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_005",
+    "category": "semantic",
+    "description": "Void variable declaration",
+    "source": "int main() {\n    void x;\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_006",
+    "category": "semantic",
+    "description": "Return type mismatch: void returns int",
+    "source": "void doNothing() {\n    return 42;\n}\nint main() {\n    doNothing();\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_007",
+    "category": "semantic",
+    "description": "Wrong argument count",
+    "source": "int add(int a, int b) {\n    return a + b;\n}\nint main() {\n    int r = add(1, 2, 3);\n    return r;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_008",
+    "category": "semantic",
+    "description": "Undeclared identifier in assignment",
+    "source": "int main() {\n    z = 5;\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_009",
+    "category": "semantic",
+    "description": "Float = string mismatch",
+    "source": "int main() {\n    float x = \"world\";\n    return 0;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "sem_010",
+    "category": "semantic",
+    "description": "Duplicate function declaration",
+    "source": "int foo() { return 1; }\nint foo() { return 2; }\nint main() { return foo(); }\n",
+    "expected_errors": 1,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "multi_001",
+    "category": "multiple",
+    "description": "Missing semicolon followed by undeclared identifier",
+    "source": "int main() {\n    int x = 10\n    return y;\n}\n",
+    "expected_errors": 2,
+    "expected_categories": ["syntax", "semantic"],
+    "expect_ast": false,
+    "expected_repair": "semicolon"
+  },
+  {
+    "id": "multi_002",
+    "category": "multiple",
+    "description": "Two undeclared identifiers",
+    "source": "int main() {\n    int z = a + b;\n    return z;\n}\n",
+    "expected_errors": 2,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "multi_003",
+    "category": "multiple",
+    "description": "Lexical and syntax errors",
+    "source": "int main() {\n    int x = 10 @;\n    return x\n}\n",
+    "expected_errors": 2,
+    "expected_categories": ["lexical", "syntax"],
+    "expect_ast": false,
+    "expected_repair": null
+  },
+  {
+    "id": "multi_004",
+    "category": "multiple",
+    "description": "Multiple independent semantic errors",
+    "source": "int main() {\n    int x = \"bad\";\n    float y = \"also bad\";\n    return z;\n}\n",
+    "expected_errors": 3,
+    "expected_categories": ["semantic"],
+    "expect_ast": true,
+    "expected_repair": null
+  },
+  {
+    "id": "multi_005",
+    "category": "multiple",
+    "description": "Repair regression test: valid fix exists",
+    "source": "int main() {\n    int x = 5\n    return x;\n}\n",
+    "expected_errors": 1,
+    "expected_categories": ["syntax"],
+    "expect_ast": false,
+    "expected_repair": "semicolon"
+  }
+]
